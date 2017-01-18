@@ -76,13 +76,19 @@ namespace MahApps.Metro.Application1
 
                 // otwórz połączenie:
                 sqlConn.Open();
-                logowanie.Ustaw_login(Text_Logowanie.ToString());
+                logowanie.Ustaw_login(Text_Logowanie.Text);
                 logowanie.Ustaw_haslo(Text_Haslo.ToString());
-
+                Text_Logowanie.Text = "";
+                Text_Haslo.Clear();
                 sqlConn.Close();
                 //asgjhasfgjas
                 Logowanie.Visibility = Visibility.Hidden;
                 Panel.Visibility = Visibility.Visible;
+                Wyloguj.Visibility = Visibility.Visible;
+                textBox_dodaj_menu.Visibility = Visibility.Hidden;
+                label_DodajMenu.Visibility = Visibility.Hidden;
+                label_UsunMenu.Visibility = Visibility.Hidden;
+                comboBox_Copy.Visibility = Visibility.Hidden;
             }
             catch (System.Data.SqlClient.SqlException se)
             {
@@ -155,7 +161,7 @@ namespace MahApps.Metro.Application1
                     int id_menu = (int)sqlCmd.ExecuteScalar();
                     string result = Tekst_Menu_Cena.Text.Replace(",", ".");
 
-                    string insert = "Select count(*) from Produkt where Opis_produktu = '" + Tekst_Menu_Opis.Text + "' and Cena_produktu='" + result + "'";
+                    string insert = "Select count(*) from Produkt where Opis_produktu = '" + Tekst_Menu_Opis.Text + "' and Cena_produktu='" + result + "' and Id_menu= "+ id_menu;
                     sqlCmd.CommandText = insert.Replace(",", ".");
                     int liczba_wierszu = (int)sqlCmd.ExecuteScalar();
                     if (liczba_wierszu == 0)
@@ -287,7 +293,7 @@ namespace MahApps.Metro.Application1
 
             Tekst_Stoliki_Numer.Text = "";
             Tekst_Stoliki_Miejsca.Text = "";
-            sqlCmd.CommandText = "select Numer, Miejsca from Wyswietl_Stolik  ";
+            sqlCmd.CommandText = "select Numer, Miejsca from Wyswietl_Stolik where Numer>0 ";
 
             dataReader = sqlCmd.ExecuteReader();
 
@@ -387,14 +393,14 @@ namespace MahApps.Metro.Application1
 
 
                 DateTime pora = DateTime.Now;
-                string alter = "Select Count(*) from Stolik_Rezerwacja where Numer =" + row[0].ToString() + " and Data>='" + pora.Year + "-" + pora.Month + "-" + pora.Day + "' and Czas>='" + pora.Hour + ":" + pora.Minute + ":" + pora.Second + "'";
+                string alter = "Select Count(*) from Stolik_Rezerwacja where (Numer =" + row[0].ToString() + " and Data>'" + pora.Year + "-" + pora.Month + "-" + pora.Day + "' and Czas>='" + pora.Hour + ":" + pora.Minute + ":" + pora.Second + "') or  (Numer = " + row[0].ToString() + " and Data= '" + pora.Year + "-" + pora.Month + "-" + pora.Day + "' and Czas>= '" + pora.Hour + ":" + pora.Minute + ":" + pora.Second + "')";
                 sqlCmd.CommandText = alter;
                 int liczba_wierszy = (int)sqlCmd.ExecuteScalar();
                 //jeżeli istnieje rezerwacja na kolejne dni nie mozna usunąć 
                 if (liczba_wierszy == 0)
                 {
                     //zlicza czy kiedykolwiek byla rezerwacja na ten stolik
-                    string alter3 = "Select Count(*) from Stolik_Rezerwacja where Numer =" + row[0].ToString() + " and Data<'" + pora.Year + "-" + pora.Month + "-" + pora.Day + "' and Czas>='" + pora.Hour + ":" + pora.Minute + ":" + pora.Second + "'";
+                    string alter3 = "Select Count(*) from Stolik_Rezerwacja where (Numer =" + row[0].ToString() + " and Data<'" + pora.Year + "-" + pora.Month + "-" + pora.Day + "') or ( Czas<='" + pora.Hour + ":" + pora.Minute + ":" + pora.Second + "'" + " and  Data= '" + pora.Year + "-" + pora.Month + "-" + pora.Day + "' and Numer =" + row[0].ToString() + ")";
                     sqlCmd.CommandText = alter3;
                     int liczba_wierszy3 = (int)sqlCmd.ExecuteScalar();
                     alter = "Select Count(*) from Stolik_Zamowienie where Numer =" + row[0].ToString();
@@ -1125,13 +1131,14 @@ namespace MahApps.Metro.Application1
             conn.Open();
             SqlCommand cmd = new SqlCommand(Sql, conn);
             SqlDataReader DR = cmd.ExecuteReader();
-
-            while (DR.Read())
+            if (DR != null)
             {
-                Combo_Zamowienie_Stolik.Items.Add(DR[2].ToString());
+                while (DR.Read())
+                {
+                    Combo_Zamowienie_Stolik.Items.Add(DR[0].ToString());
 
+                }
             }
-
             conn.Close();
 
 
@@ -1279,22 +1286,22 @@ namespace MahApps.Metro.Application1
             {
 
                 dolisty temp2 = (dolisty)listView.SelectedItem;
-
+                zamowienie temp3= null;
                 foreach (zamowienie temp in Zamowienia)
                 {
                     if (Convert.ToInt32(Combo_Zamowienie_Stolik.Text) == temp.Numer_stolika)
                     {
 
                         temp.Usun(temp2.Nazwa, Convert.ToInt32(temp2.Ilosc), temp2.Cena);
-
+                        temp3 = temp;
                     }
 
 
-                    listView.Items.Clear();
-
-                    temp.Wyswietl(listView);
+                    
                 }
+                listView.Items.Clear();
 
+                temp3.Wyswietl(listView);
             }
 
 
@@ -1310,12 +1317,175 @@ namespace MahApps.Metro.Application1
                     {
                         listView.Items.Clear();
                         temp.Wyswietl(listView);
-                        Console.WriteLine("chuj");
                     }
                 }
             }
         }
 
-        
+        private void Combo_Zamowienie_Stolik_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            if (Combo_Zamowienie_Stolik.SelectedItem != null)
+            {
+                foreach (zamowienie temp in Zamowienia)
+                {
+                    if (Convert.ToInt32(Combo_Zamowienie_Stolik.SelectedItem.ToString()) == temp.Numer_stolika)
+                    {
+                        listView.Items.Clear();
+                        temp.Wyswietl(listView);
+                    }
+                }
+            }
+        }
+
+        private void rachunek_Click(object sender, RoutedEventArgs e)
+        {
+            if (listView != null)
+            {
+                SqlConnection sqlConn = new SqlConnection("Server = " + serwer + ";Integrated Security = SSPI; Database = 'Restauracja'");
+
+                sqlConn.Open();
+                SqlCommand sqlCmd = new SqlCommand();
+                sqlCmd.Connection = sqlConn;
+                decimal kwota = 0;
+                string cmd;
+
+                foreach (dolisty temp in listView.Items)
+                {
+                    kwota += (Convert.ToDecimal(temp.Cena) * Convert.ToInt32(temp.Ilosc));
+                }
+
+
+                cmd = "Select Id_pracownika from Pracownik where Login_pracownik = '" + logowanie.Login + "'";
+                sqlCmd.CommandText = cmd;
+                int id_pracownik = (int)sqlCmd.ExecuteScalar();
+                int numer_stolika = Convert.ToInt32(Combo_Zamowienie_Stolik.SelectedItem.ToString());
+                int id_klienta = 0;
+                int id_rezerwacja =0;
+                foreach (zamowienie temp in Zamowienia)
+                {
+                    if (temp.Numer_stolika == Convert.ToInt32(Combo_Zamowienie_Stolik.SelectedItem.ToString()))
+                    {
+                        id_klienta = temp.Id_klienta;
+                    }
+
+                }
+                foreach (zamowienie temp in Zamowienia)
+                {
+                    if (temp.Numer_stolika == Convert.ToInt32(Combo_Zamowienie_Stolik.SelectedItem.ToString()))
+                    {
+                       id_rezerwacja = temp.Id_rezerwacji;
+                    }
+
+                }
+                
+                DateTime czas = DateTime.Now;
+                
+                cmd = "Insert Into Zamowienie (Data, Numer_Stolika, Id_rezerwacji, Id_pracownika, Kwota) " +
+                 "Values ('" + czas.Year + "-" + czas.Month + "-" + czas.Day + "', " + numer_stolika + ", "  + id_rezerwacja + "," + id_pracownik + "," + kwota + ")";
+                sqlCmd.CommandText = cmd;
+                sqlCmd.ExecuteNonQuery();
+                listView.Items.Clear();
+                foreach (zamowienie temp in Zamowienia)
+                {
+                    if(temp.Numer_stolika == Convert.ToInt32(Combo_Zamowienie_Stolik.SelectedItem.ToString()))
+                    {
+                        temp.Usun_All();
+                    }
+                    
+                }
+                sqlConn.Close();
+            }
+        }
+
+        private void Wyloguj_Click(object sender, RoutedEventArgs e)
+        {
+            Logowanie.Visibility = Visibility.Visible;
+            logowanie.Ustaw_haslo("");
+            logowanie.Ustaw_login("");
+            Panel.Visibility = Visibility.Hidden;
+            Wyloguj.Visibility = Visibility.Hidden;
+    
+        }
+
+        private void Dodaj_Menu_Click(object sender, RoutedEventArgs e)
+        {
+            if (label_DodajMenu.Visibility == Visibility.Visible)
+            {
+                label_DodajMenu.Visibility = Visibility.Hidden;
+                textBox_dodaj_menu.Visibility = Visibility.Hidden;
+                if (textBox_dodaj_menu.Text != "")
+                {
+
+                    SqlConnection sqlConn = new SqlConnection("Server = " + serwer + ";Integrated Security = SSPI; Database = 'Restauracja'");
+
+                    sqlConn.Open();
+                    SqlCommand sqlCmd = new SqlCommand();
+                    sqlCmd.Connection = sqlConn;
+                    string cmd = "Insert into Menu (Opis) Values ('" + textBox_dodaj_menu.Text + "')";
+                    sqlCmd.CommandText = cmd;
+                    sqlCmd.ExecuteNonQuery();
+                    textBox_dodaj_menu.Text = "";
+                    sqlConn.Close();
+                }
+            }
+            else
+            {
+                label_DodajMenu.Visibility = Visibility.Visible;
+                textBox_dodaj_menu.Visibility = Visibility.Visible;
+            }
+
+        }
+
+     
+        private void comboBox_Copy_DropDownOpened(object sender, EventArgs e)
+        {
+            if (comboBox.Items.Count > 0) comboBox.Items.Clear();
+
+            string Sql = "select Opis from Menu";
+            SqlConnection conn = new SqlConnection("Server = " + serwer + ";Integrated Security = SSPI; Database = 'Restauracja'");
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(Sql, conn);
+            SqlDataReader DR = cmd.ExecuteReader();
+
+            while (DR.Read())
+            {
+                comboBox_Copy.Items.Add(DR[0]);
+
+            }
+
+            conn.Close();
+        }
+
+        private void Usun_Menu_Click(object sender, RoutedEventArgs e)
+        {
+            if (label_UsunMenu.Visibility == Visibility.Visible)
+            {
+                label_UsunMenu.Visibility = Visibility.Hidden;
+                comboBox_Copy.Visibility = Visibility.Hidden;
+                if (comboBox_Copy.SelectedItem != null)
+                {
+                    SqlConnection sqlConn = new SqlConnection("Server = " + serwer + ";Integrated Security = SSPI; Database = 'Restauracja'");
+
+                    sqlConn.Open();
+                    SqlCommand sqlCmd = new SqlCommand();
+                    sqlCmd.Connection = sqlConn;
+
+
+                        
+                        
+                    sqlConn.Close();
+
+                    wyswietlMenu();
+
+
+                    
+                }
+            }
+            else
+            {
+                label_UsunMenu.Visibility = Visibility.Visible;
+                comboBox_Copy.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

@@ -165,8 +165,8 @@ namespace MahApps.Metro.Application1
 
             }
 
-
         }
+
         public void Usun(string p, int i, string c)
         {
             int z = 0;
@@ -182,6 +182,11 @@ namespace MahApps.Metro.Application1
                 z++;
             }
             if (jest == true) { zamowione.RemoveAt(licznik); }
+        }
+
+        public void Usun_All()
+        {
+            zamowione.Clear();
         }
 
     }

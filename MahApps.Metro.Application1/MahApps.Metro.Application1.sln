@@ -8,8 +8,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AA3AD42B-E77F-45F0-AEA2-88F8707DB104}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\..\Downloads\krzyz.png = ..\..\..\..\Downloads\krzyz.png
+		menu2.png = menu2.png
+		pracownicy3.png = pracownicy3.png
+		rezerwacja2.png = rezerwacja2.png
+		stoli2.png = stoli2.png
 		strzalka.png = strzalka.png
 		talerz.png = talerz.png
+		wyloguj.png = wyloguj.png
+		zamowienie.png = zamowienie.png
+		zamowienie2.png = zamowienie2.png
 	EndProjectSection
 EndProject
 Global
