@@ -1,0 +1,258 @@
+﻿<Controls:MetroWindow x:Class="MahApps.Metro.Application1.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      Title="Restauracja"
+                      Height="396"
+                      Width="595.167">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="248*"/>
+            <RowDefinition Height="73*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="149*"/>
+            <ColumnDefinition Width="148*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="Logowanie" HorizontalAlignment="Left" Height="321" Margin="1,0,-0.4,-0.2" VerticalAlignment="Top" Width="593" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Label x:Name="Login" Content="Login:" HorizontalAlignment="Left" Margin="240,96,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="Haslo" Content="Hasło:" HorizontalAlignment="Left" Margin="240,163,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="Text_Logowanie" HorizontalAlignment="Left" Height="23" Margin="240,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <PasswordBox x:Name="Text_Haslo" HorizontalAlignment="Left" Margin="240,194,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
+            <Button x:Name="Zaloguj_Sie" Content="Zaloguj się" HorizontalAlignment="Left" Margin="262,222,0,0" VerticalAlignment="Top" Width="75" Click="Zaloguj_Sie_Click" IsDefault="True"/>
+        </Grid>
+        <Grid x:Name="Panel" HorizontalAlignment="Left" Height="321" Margin="0,0,-0.4,-0.2" VerticalAlignment="Top" Width="594" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <TabControl x:Name="tabControl" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" UseLayoutRounding="True" Margin="0,0,0,-48" Height="369" VerticalAlignment="Top">
+                <TabItem>
+
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Height="32" Source="talerz.png" Width="32"/>
+                            <TextBlock Text="Zamówienie" Margin="2,10,0,0" VerticalAlignment="Top" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid Background="#FFE5E5E5" Margin="0" OpacityMask="Black">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="143*"/>
+                            <RowDefinition Height="179*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="52*"/>
+                            <ColumnDefinition Width="211*"/>
+                            <ColumnDefinition Width="325*"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox x:Name="Zamowienie_Combo_Menu" HorizontalAlignment="Left" Margin="20,43,0,0" VerticalAlignment="Top" Width="120" DropDownOpened="Zamowienie_Combo_Menu_DropDownOpened" SelectionChanged="Zamowienie_Combo_Menu_SelectionChanged" Grid.Column="1"/>
+                        <ComboBox x:Name="Zamowienie_Combo_Danie" HorizontalAlignment="Right" Margin="0,108,41,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+                        <ComboBox x:Name="Zamowienie_Combo_Zupa" HorizontalAlignment="Left" Margin="50,4,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="1"/>
+                        <ComboBox x:Name="Zamowienie_Combo_Przystawka" HorizontalAlignment="Left" Margin="50,44,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="1"/>
+                        <ComboBox x:Name="Zamowienie_Combo_Deser" HorizontalAlignment="Left" Margin="50,84,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="1"/>
+                        <ComboBox x:Name="Zamowienie_Combo_Napoj" HorizontalAlignment="Left" Margin="50,123,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="1"/>
+                        <Label x:Name="Zamowienie_Etykieta_Menu" Content="Menu" HorizontalAlignment="Left" Margin="4,39,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,-1.077"/>
+                        <Label x:Name="label" Content="Dania główne:" HorizontalAlignment="Left" Margin="11,104,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="91"/>
+                        <Label x:Name="label1" Content="Zupy:" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.921,2.423" Grid.Column="1" Grid.Row="1"/>
+                        <Label x:Name="label2" Content="Przystawki:" HorizontalAlignment="Left" Margin="29,40,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="1"/>
+                        <Label x:Name="label3" Content="Desery:" HorizontalAlignment="Left" Margin="48,80,0,0" VerticalAlignment="Top" Width="49" Grid.ColumnSpan="2" Grid.Row="1"/>
+                        <Label x:Name="label4" Content="Napoje:" HorizontalAlignment="Left" Margin="46,119,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="1"/>
+                        <ListView x:Name="listView" Grid.Column="2" Margin="57,39,20,0" VerticalAlignment="Top" Initialized="listView_Initialized" Height="253" Grid.RowSpan="2" Width="250">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Nazwa" DisplayMemberBinding="{Binding Nazwa}" Width="Auto"/>
+                                    <GridViewColumn Header="Ilość" DisplayMemberBinding="{Binding Ilosc}" Width="Auto"/>
+                                    <GridViewColumn Header="Cena" DisplayMemberBinding="{Binding Cena}" Width="Auto"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <ComboBox x:Name="Combo_Zamowienie_Stolik" Grid.Column="1" HorizontalAlignment="Left" Margin="20,16,0,0" VerticalAlignment="Top" Width="120" DropDownOpened="Combo_Zamowienie_Stolik_DropDownOpened" Initialized="Combo_Zamowienie_Stolik_Initialized"/>
+                        <Label x:Name="label5" Content="Stolik" HorizontalAlignment="Left" Margin="6,13,0,0" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="c1" Grid.Column="1" HorizontalAlignment="Left" Margin="170,108,0,0" VerticalAlignment="Top" Width="41" Initialized="c1_Initialized"/>
+                        <ComboBox x:Name="c2" Grid.Column="1" HorizontalAlignment="Left" Margin="170,4,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41" Initialized="c2_Initialized"/>
+                        <ComboBox x:Name="c3" Grid.Column="1" HorizontalAlignment="Left" Margin="170,44,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41" Initialized="c3_Initialized"/>
+                        <ComboBox x:Name="c4" Grid.Column="1" HorizontalAlignment="Left" Margin="170,84,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41" Initialized="c4_Initialized"/>
+                        <ComboBox x:Name="c5" Grid.Column="1" HorizontalAlignment="Left" Margin="170,123,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41" Initialized="c5_Initialized"/>
+                        <Button x:Name="b1" Grid.Column="2" HorizontalAlignment="Left" Margin="5,108,0,0" VerticalAlignment="Top" Width="52" Click="b1_Click" Background="#FFF1F0F0" FontSize="10" Height="26" FontWeight="Bold">
+                            <Rectangle Height="14" Width="22">
+                                <Rectangle.Stroke>
+                                    <ImageBrush ImageSource="strzalka.png"/>
+                                </Rectangle.Stroke>
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="strzalka.png"/>
+                                </Rectangle.OpacityMask>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="strzalka.png"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button x:Name="b2" Grid.Column="2" HorizontalAlignment="Left" Margin="5,4,0,0" VerticalAlignment="Top" Width="52" Grid.Row="1" Click="b2_Click" >
+                            <Rectangle Height="14" Width="22">
+                                <Rectangle.Stroke>
+                                    <ImageBrush ImageSource="strzalka.png"/>
+                                </Rectangle.Stroke>
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="strzalka.png"/>
+                                </Rectangle.OpacityMask>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="strzalka.png"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button x:Name="b3" Grid.Column="2" HorizontalAlignment="Left" Margin="5,44,0,0" VerticalAlignment="Top" Width="52" Grid.Row="1" Click="b3_Click">
+                            <Rectangle Height="14" Width="22">
+                                <Rectangle.Stroke>
+                                    <ImageBrush ImageSource="strzalka.png"/>
+                                </Rectangle.Stroke>
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="strzalka.png"/>
+                                </Rectangle.OpacityMask>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="strzalka.png"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button x:Name="b4" Grid.Column="2" HorizontalAlignment="Left" Margin="5,84,0,0" VerticalAlignment="Top" Width="52" Grid.Row="1" Click="b4_Click">
+                            <Rectangle Height="14" Width="22">
+                                <Rectangle.Stroke>
+                                    <ImageBrush ImageSource="strzalka.png"/>
+                                </Rectangle.Stroke>
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="strzalka.png"/>
+                                </Rectangle.OpacityMask>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="strzalka.png"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button x:Name="b5" Grid.Column="2" HorizontalAlignment="Left" Margin="5,123,0,0" VerticalAlignment="Top" Width="52" Grid.Row="1" Click="b5_Click">
+                            <Rectangle Height="14" Width="22">
+                                <Rectangle.Stroke>
+                                    <ImageBrush ImageSource="strzalka.png"/>
+                                </Rectangle.Stroke>
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="strzalka.png"/>
+                                </Rectangle.OpacityMask>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="strzalka.png"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <Button x:Name="krzyżyk" Content="Usuń" Grid.Column="2" HorizontalAlignment="Left" Margin="240,149,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="krzyżyk_Click">
+                            <Button.Background>
+                                <ImageBrush/>
+                            </Button.Background>
+                        </Button>
+
+
+                    </Grid>
+                </TabItem>
+                <TabItem >
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Height="32" Source="talerz.png" Width="32"/>
+                            <TextBlock Text="Rezerwacja" Margin="2,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid Background="#FFE5E5E5" Margin="0,-2,0,1.4">
+                        <Label x:Name="Etykieta_Rezerwacja_Imie" Content="Imię" HorizontalAlignment="Left" Margin="439,43,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="Tekst_Rezerwacja_Imie" HorizontalAlignment="Left" Height="23" Margin="439,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                        <Label x:Name="Etykieta_Rezerwacja_Nazwisko" Content="Nazwisko" HorizontalAlignment="Left" Margin="439,97,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="Tekst_Rezerwacja_Nazwisko" HorizontalAlignment="Left" Height="23" Margin="439,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                        <TextBox x:Name="Tekst_Rezerwacja_Numer" HorizontalAlignment="Left" Height="23" Margin="439,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.552,5.626"/>
+                        <Label x:Name="Etykieta_Rezerwacja_Numer" Content="Telefon" HorizontalAlignment="Left" Margin="439,164,0,0" VerticalAlignment="Top"/>
+                        <DataGrid x:Name="Dane_Rezerwacja" HorizontalAlignment="Left" Margin="23,25,0,0" VerticalAlignment="Top" Width="247" Height="257" Initialized="Dane_Rezerwacja_Initialized" IsReadOnly="True"/>
+                        <Label x:Name="Etykieta_Rezerwacja_Stolik" Content="Numer stolika" HorizontalAlignment="Left" Margin="289,128,0,0" VerticalAlignment="Top"/>
+                        <Button x:Name="Przycisk_Rezerwacja_Dodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="289,263,0,0" VerticalAlignment="Top" Width="120" Height="19" Click="Przycisk_Rezerwacja_Dodaj_Click"/>
+                        <Button x:Name="Przycisk_Rezerwacja_Usun" Content="Usuń" HorizontalAlignment="Left" Margin="430,263,0,0" VerticalAlignment="Top" Width="120" Height="19" Click="Przycisk_Rezerwacja_Usun_Click"/>
+                        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="289,167,0,0" VerticalAlignment="Top" Width="56" DropDownOpened="comboBox1_DropDownOpened"/>
+                        <DatePicker x:Name="dzien" HorizontalAlignment="Left" Margin="289,26,0,0" VerticalAlignment="Top" SelectedDateChanged="dzien_SelectedDateChanged"/>
+                        <ComboBox x:Name="comboBox2" HorizontalAlignment="Left" Margin="289,81,0,0" VerticalAlignment="Top" Width="56" Initialized="comboBox2_Initialized" SelectionChanged="comboBox2_SelectionChanged"/>
+                        <ComboBox x:Name="comboBox3" HorizontalAlignment="Left" Margin="350,81,0,0" VerticalAlignment="Top" Width="51" Initialized="comboBox3_Initialized" SelectionChanged="comboBox3_SelectionChanged"/>
+
+
+                    </Grid>
+
+                </TabItem>
+                <TabItem >
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Height="32" Source="talerz.png" Width="32" Margin="0,1,0,1.4"/>
+                            <TextBlock Text="Menu" Margin="2,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid Background="#FFE5E5E5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="182*"/>
+                            <ColumnDefinition Width="47*"/>
+                            <ColumnDefinition Width="65*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="Tekst_Menu_Cena" HorizontalAlignment="Left" Height="23" Margin="74,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="Tekst_Menu_Cena_PreviewTextInput" Grid.ColumnSpan="2" TextChanged="Tekst_Menu_Cena_TextChanged" Grid.Column="1"/>
+                        <TextBox x:Name="Tekst_Menu_Opis" HorizontalAlignment="Left" Height="23" Margin="74,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" Grid.Column="1"/>
+                        <Label x:Name="Etykieta_Menu_Nr" Content="Menu" HorizontalAlignment="Left" Margin="28,26,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label x:Name="Etykieta_Menu_Cena" Content="Cena" HorizontalAlignment="Left" Margin="32,103,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label x:Name="Etykieta_Menu_Opis" Content="Opis" Margin="35,140,25,0" VerticalAlignment="Top" RenderTransformOrigin="0.339,0.406" Grid.Column="1"/>
+                        <Button x:Name="Przycisk_Menu_Usun" Content="Usuń" HorizontalAlignment="Left" Margin="8.2,214,0,0" VerticalAlignment="Top" Width="75" Click="Przycisk_Menu_Usun_Click" Grid.Column="1"/>
+                        <DataGrid x:Name="Dane_Menu" HorizontalAlignment="Left" Margin="29,21,0,0" VerticalAlignment="Top" Height="240" Width="311" IsReadOnly="True" ColumnWidth="*" FrozenColumnCount="1" CanUserDeleteRows="False"/>
+                        <Button x:Name="Przycisk_Menu_Dodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="18.4,214,0,0" VerticalAlignment="Top" Width="75" Click="Przycisk_Menu_Dodaj_Click" Grid.Column="2"/>
+                        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="74,30,0,0" VerticalAlignment="Top" Width="120" DropDownOpened="comboBox_DropDownOpened" DropDownClosed="comboBox_DropDownClosed" Grid.ColumnSpan="2" Grid.Column="1"/>
+                        <Label x:Name="Etykieta_Menu_Opis1" Content="Kategoria" Grid.Column="1" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="comboBox4" Grid.Column="1" HorizontalAlignment="Left" Margin="74,66,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" Initialized="comboBox4_Initialized"/>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="Pracownicy">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Height="36" Margin="0,0,-0.4,0" VerticalAlignment="Top">
+                            <Image Height="32" Source="talerz.png" Width="32"/>
+                            <TextBlock Margin="2,0,0,0" VerticalAlignment="Center" ><Run Text="Pracownicy"/></TextBlock>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid Background="#FFE5E5E5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="267*"/>
+                            <ColumnDefinition Width="173*"/>
+                            <ColumnDefinition Width="148*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="Etykieta_Pracownicy_Imie" Content="Imię" HorizontalAlignment="Left" Margin="74.8,40,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label x:Name="Etykieta_Pracownicy_Nazwisko" Content="Nazwisko" HorizontalAlignment="Left" Margin="46.8,81,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label x:Name="Etykieta_Pracownicy_Stanowisko" Content="Stanowisko" HorizontalAlignment="Left" Margin="37.8,122,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <TextBox x:Name="Tekst_Pracownicy_Imie" HorizontalAlignment="Left" Height="23" Margin="120.8,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <TextBox x:Name="Tekst_Pracownicy_Nazwisko" HorizontalAlignment="Left" Height="23" Margin="120.8,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <Button x:Name="Przycisk_Pracownicy_Dodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="32.8,247,0,0" VerticalAlignment="Top" Width="75" Click="Przycisk_Pracownicy_Dodaj_Click" Grid.Column="1"/>
+                        <Button x:Name="Przycisk_Pracownicy_Usun" Content="Usuń" HorizontalAlignment="Left" Margin="120.8,247,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Grid.ColumnSpan="2" Click="Przycisk_Pracownicy_Usun_Click"/>
+                        <Button x:Name="Przycisk_Pracownicy_Edytuj" Content="Edytuj" HorizontalAlignment="Left" Margin="39,247,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="Przycisk_Pracownicy_Edytuj_Click"/>
+                        <ComboBox x:Name="comboBox_Pracownicy" HorizontalAlignment="Left" Margin="120.8,122,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <TextBox x:Name="Tekst_Pracownicy_Haslo" HorizontalAlignment="Left" Height="23" Margin="120.8,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <Label x:Name="Etykieta_Pracownicy_Haslo" Content="Hasło" HorizontalAlignment="Left" Margin="66.8,199,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <TextBox x:Name="Tekst_Pracownicy_Login" HorizontalAlignment="Left" Height="23" Margin="120.8,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <Label x:Name="Etykieta_Pracownicy_Login" Content="Login" HorizontalAlignment="Left" Margin="66.8,162,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.545,-0.055" Grid.Column="1"/>
+                        <DataGrid x:Name="Dane_Pracownicy" HorizontalAlignment="Left" Margin="29,40,0,0" VerticalAlignment="Top" Height="226" Width="253" ColumnWidth="*" FrozenColumnCount="1" IsReadOnly="True" Grid.ColumnSpan="2" SelectedCellsChanged="Dane_Pracownicy_SelectedCellsChanged"/>
+
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="stolik"  >
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Height="36" Margin="0,0,-0.4,0" VerticalAlignment="Top">
+                            <Image Height="32" Source="talerz.png" Width="32"/>
+                            <TextBlock Margin="2,0,0,0" VerticalAlignment="Center" ><Run Text="Stoliki"/></TextBlock>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid Background="#FFE5E5E5" Width="588">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="352*"/>
+                            <ColumnDefinition Width="237*"/>
+                        </Grid.ColumnDefinitions>
+                        <DataGrid x:Name="Dane_Stoliki" HorizontalAlignment="Left" Margin="24,29,0,0" VerticalAlignment="Top" Height="231" Width="221" IsReadOnly="True" ColumnWidth="*" FrozenColumnCount="1"/>
+                        <Label x:Name="Etykieta_Stoliki_Miejsca" Content="Ilość miejsc" HorizontalAlignment="Left" Margin="290,118,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                        <TextBox x:Name="Tekst_Stoliki_Miejsca" HorizontalAlignment="Left" Height="23" Margin="39.5,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.458,0.218" PreviewTextInput="Tekst_Stoliki_Miejsca_PreviewTextInput" Grid.Column="1"/>
+                        <Button x:Name="Przycisk_Stoliki_Dodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="290,241,0,0" VerticalAlignment="Top" Width="75" Click="Przycisk_Stoliki_Dodaj_Click" Grid.ColumnSpan="2"/>
+                        <Label x:Name="Etykieta_Stoliki_Numer" Content="Numer stolika" HorizontalAlignment="Left" Margin="290,87,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                        <TextBox x:Name="Tekst_Stoliki_Numer" HorizontalAlignment="Left" Height="23" Margin="39.5,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.458,0.218" PreviewTextInput="Tekst_Stoliki_Numer_PreviewTextInput" Grid.Column="1"/>
+                        <Button x:Name="Przycisk_Stoliki_Usun" Content="Usuń" HorizontalAlignment="Left" Margin="28.5,241,0,0" VerticalAlignment="Top" Width="75" Click="Przycisk_Stoliki_Usun_Click" Grid.Column="1"/>
+                        <Button x:Name="Przycisk_Stoliki_Edytuj" Content="Zmień numer" HorizontalAlignment="Left" Margin="123,241,0,0" VerticalAlignment="Top" Width="86" Click="Przycisk_Stoliki_Edytuj_Click" Grid.Column="1"/>
+
+                    </Grid>
+                </TabItem>
+
+            </TabControl>
+        </Grid>
+
+
+    </Grid>
+</Controls:MetroWindow>
