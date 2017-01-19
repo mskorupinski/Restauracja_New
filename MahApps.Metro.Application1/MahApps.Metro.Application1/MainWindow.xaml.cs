@@ -1390,7 +1390,7 @@ namespace MahApps.Metro.Application1
                     kwota += (Convert.ToDecimal(temp.Cena) * Convert.ToInt32(temp.Ilosc));
                 }
 
-
+                //kasd
                 cmd = "Select Id_pracownika from Pracownik where Login_pracownik = '" + logowanie.Login + "'";
                 sqlCmd.CommandText = cmd;
                 int id_pracownik = (int)sqlCmd.ExecuteScalar();
