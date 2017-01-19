@@ -917,8 +917,10 @@ namespace MahApps.Metro.Application1
                 string zapytanie = "select Id_stolika from Stolik where Numer_stolika=" + comboBox1.SelectedItem.ToString();
                 sqlCmd.CommandText = zapytanie;
                 int numer = Convert.ToInt32(sqlCmd.ExecuteScalar().ToString());
-
-                string alter = "select count(*) from Wyswietl_Rezerwacja where Data='" + dzien.SelectedDate.Value.Year + " / " + dzien.SelectedDate.Value.Month + " / " + dzien.SelectedDate.Value.Day + "' and Godzina='" + comboBox2.SelectedItem.ToString() + ":" + comboBox3.SelectedItem.ToString() + ":00' and Stolik ='" + comboBox1.SelectedItem.ToString() + "'";
+                int godzina_przed = Convert.ToInt32(comboBox2.SelectedItem.ToString()) - 1;
+                int godzina_po = Convert.ToInt32(comboBox2.SelectedItem.ToString()) + 1;
+                //string alter = "select count(*) from Wyswietl_Rezerwacja where Data='" + dzien.SelectedDate.Value.Year + " / " + dzien.SelectedDate.Value.Month + " / " + dzien.SelectedDate.Value.Day + "' and Godzina='" + comboBox2.SelectedItem.ToString() + ":" + comboBox3.SelectedItem.ToString() + ":00' and Stolik ='" + comboBox1.SelectedItem.ToString() + "'";
+                string alter = "select count(*) from Wyswietl_Rezerwacja where Data='" + dzien.SelectedDate.Value.Year + " / " + dzien.SelectedDate.Value.Month + " / " + dzien.SelectedDate.Value.Day + "' and Godzina Between '" + godzina_przed.ToString() + ":" + comboBox3.SelectedItem.ToString() + ":00' and '"+ godzina_po.ToString() + ":" + comboBox3.SelectedItem.ToString() + ":00' and Stolik ='" + comboBox1.SelectedItem.ToString() + "'";
                 sqlCmd.CommandText = alter;
                 int czy_zarezerwowane = Convert.ToInt32(sqlCmd.ExecuteScalar().ToString());
                 
@@ -1542,6 +1544,28 @@ namespace MahApps.Metro.Application1
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Dane_Rezerwacja_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+           
+            if (e.PropertyType == typeof(DateTime))//if a column is typeof DateTime
+            {
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "yyyy-MM-dd";//set your date format 
+            }
+         
+    }
+
+        private void Tekst_Rezerwacja_Numer_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Tekst_Rezerwacja_Numer_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
+            
         }
     }
 }

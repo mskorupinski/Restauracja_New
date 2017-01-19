@@ -26,7 +26,7 @@
             <Button x:Name="Zaloguj_Sie" Content="Zaloguj się" HorizontalAlignment="Left" Margin="584,380,0,0" VerticalAlignment="Top" Width="75" Click="Zaloguj_Sie_Click" IsDefault="True"/>
         </Grid>
         <Grid x:Name="Panel" HorizontalAlignment="Left" Height="321" VerticalAlignment="Top" Width="594" Grid.RowSpan="2" Margin="-4,0,0,0">
-            <TabControl x:Name="tabControl" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" UseLayoutRounding="True" Margin="0,0,0,-48" Height="369" VerticalAlignment="Top">
+            <TabControl x:Name="tabControl" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" UseLayoutRounding="True" Margin="0,0,-274,-48" Height="369" VerticalAlignment="Top">
                 <TabItem x:Name="Karta_zamowienie" Margin="44,42,-44,-42">
 
                     <TabItem.Header>
@@ -35,32 +35,29 @@
                             <TextBlock Text="Zamówienie" Margin="2,0,0,0" VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Left" />
                         </StackPanel>
                     </TabItem.Header>
-                    <Grid Background="#FFE5E5E5" Margin="40,40,-640,-280" OpacityMask="Black">
+                    <Grid Background="#FFE5E5E5" Margin="40,40,-379,-280" OpacityMask="Black">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="143*"/>
-                            <RowDefinition Height="179*"/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="105*"/>
-                            <ColumnDefinition Width="231*"/>
-                            <ColumnDefinition Width="195*"/>
-                            <ColumnDefinition Width="77*"/>
-                            <ColumnDefinition Width="543*"/>
-                            <ColumnDefinition Width="37*"/>
+                            <ColumnDefinition Width="106*"/>
+                            <ColumnDefinition Width="234*"/>
+                            <ColumnDefinition Width="197*"/>
+                            <ColumnDefinition Width="664*"/>
                         </Grid.ColumnDefinitions>
                         <ComboBox x:Name="Zamowienie_Combo_Menu" HorizontalAlignment="Left" Margin="70,98,0,0" VerticalAlignment="Top" Width="120" DropDownOpened="Zamowienie_Combo_Menu_DropDownOpened" SelectionChanged="Zamowienie_Combo_Menu_SelectionChanged" Grid.ColumnSpan="2"/>
-                        <ComboBox x:Name="Zamowienie_Combo_Danie" HorizontalAlignment="Right" Margin="0,141,95,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="Zamowienie_Combo_Danie" HorizontalAlignment="Right" Margin="0,141,100,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2"/>
                         <ComboBox x:Name="Zamowienie_Combo_Zupa" HorizontalAlignment="Left" Margin="211,203,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2"/>
-                        <ComboBox x:Name="Zamowienie_Combo_Przystawka" HorizontalAlignment="Left" Margin="211,6,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
-                        <ComboBox x:Name="Zamowienie_Combo_Deser" HorizontalAlignment="Left" Margin="211,64,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
-                        <ComboBox x:Name="Zamowienie_Combo_Napoj" HorizontalAlignment="Left" Margin="211,117,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="Zamowienie_Combo_Przystawka" HorizontalAlignment="Left" Margin="211,256,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="Zamowienie_Combo_Deser" HorizontalAlignment="Left" Margin="211,314,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="Zamowienie_Combo_Napoj" HorizontalAlignment="Left" Margin="211,367,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2"/>
                         <Label x:Name="Zamowienie_Etykieta_Menu" Content="Menu" HorizontalAlignment="Left" Margin="26,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,-1.077"/>
                         <Label x:Name="label" Content="Dania główne:" HorizontalAlignment="Left" Margin="103,149,0,0" VerticalAlignment="Top" Width="91" Grid.Column="1" RenderTransformOrigin="0.302,0.538"/>
                         <Label x:Name="label1" Content="Zupy:" HorizontalAlignment="Left" Margin="155,203,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.921,2.423" Grid.Column="1"/>
-                        <Label x:Name="label2" Content="Przystawki:" HorizontalAlignment="Left" Margin="126,4,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"/>
-                        <Label x:Name="label3" Content="Desery:" HorizontalAlignment="Left" Margin="145,59,0,0" VerticalAlignment="Top" Width="49" Grid.Row="1" Grid.Column="1"/>
-                        <Label x:Name="label4" Content="Napoje:" HorizontalAlignment="Left" Margin="143,116,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"/>
-                        <ListView x:Name="listView" Grid.Column="4" Margin="2,39,1,0" VerticalAlignment="Top" Initialized="listView_Initialized" Height="451" Grid.RowSpan="2" FontSize="16">
+                        <Label x:Name="label2" Content="Przystawki:" HorizontalAlignment="Left" Margin="126,254,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label x:Name="label3" Content="Desery:" HorizontalAlignment="Left" Margin="145,309,0,0" VerticalAlignment="Top" Width="49" Grid.Column="1"/>
+                        <Label x:Name="label4" Content="Napoje:" HorizontalAlignment="Left" Margin="143,366,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <ListView x:Name="listView" Grid.Column="3" Margin="80,39,44,0" VerticalAlignment="Top" Initialized="listView_Initialized" Height="451" FontSize="16">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Nazwa" DisplayMemberBinding="{Binding Nazwa}" Width="301"/>
@@ -73,9 +70,9 @@
                         <Label x:Name="label5" Content="Stolik" HorizontalAlignment="Left" Margin="26,42,0,0" VerticalAlignment="Top"/>
                         <ComboBox x:Name="c1" Grid.Column="2" HorizontalAlignment="Left" Margin="126,141,0,0" VerticalAlignment="Top" Width="42" Initialized="c1_Initialized"/>
                         <ComboBox x:Name="c2" Grid.Column="2" HorizontalAlignment="Left" Margin="127,203,0,0" VerticalAlignment="Top" Width="41" Initialized="c2_Initialized"/>
-                        <ComboBox x:Name="c3" Grid.Column="2" HorizontalAlignment="Left" Margin="127,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41" Initialized="c3_Initialized"/>
-                        <ComboBox x:Name="c4" Grid.Column="2" HorizontalAlignment="Left" Margin="126,59,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41" Initialized="c4_Initialized"/>
-                        <ComboBox x:Name="c5" Grid.Column="2" HorizontalAlignment="Left" Margin="127,116,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41" Initialized="c5_Initialized"/>
+                        <ComboBox x:Name="c3" Grid.Column="2" HorizontalAlignment="Left" Margin="127,260,0,0" VerticalAlignment="Top" Width="41" Initialized="c3_Initialized"/>
+                        <ComboBox x:Name="c4" Grid.Column="2" HorizontalAlignment="Left" Margin="126,309,0,0" VerticalAlignment="Top" Width="41" Initialized="c4_Initialized"/>
+                        <ComboBox x:Name="c5" Grid.Column="2" HorizontalAlignment="Left" Margin="127,366,0,0" VerticalAlignment="Top" Width="41" Initialized="c5_Initialized"/>
                         <Button x:Name="b1" Grid.Column="3" HorizontalAlignment="Left" Margin="0,141,0,0" VerticalAlignment="Top" Width="52" Click="b1_Click" Background="#FFF1F0F0" FontSize="10" Height="26" FontWeight="Bold">
                             <Rectangle Height="14" Width="22">
                                 <Rectangle.Stroke>
@@ -102,7 +99,7 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Button>
-                        <Button x:Name="b3" Grid.Column="3" HorizontalAlignment="Left" Margin="0,4,0,0" VerticalAlignment="Top" Width="52" Grid.Row="1" Click="b3_Click">
+                        <Button x:Name="b3" Grid.Column="3" HorizontalAlignment="Left" Margin="0,254,0,0" VerticalAlignment="Top" Width="52" Click="b3_Click">
                             <Rectangle Height="14" Width="22">
                                 <Rectangle.Stroke>
                                     <ImageBrush ImageSource="strzalka.png"/>
@@ -115,7 +112,7 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Button>
-                        <Button x:Name="b4" Grid.Column="3" HorizontalAlignment="Left" Margin="0,59,0,0" VerticalAlignment="Top" Width="52" Grid.Row="1" Click="b4_Click">
+                        <Button x:Name="b4" Grid.Column="3" HorizontalAlignment="Left" Margin="0,309,0,0" VerticalAlignment="Top" Width="52" Click="b4_Click">
                             <Rectangle Height="14" Width="22">
                                 <Rectangle.Stroke>
                                     <ImageBrush ImageSource="strzalka.png"/>
@@ -128,7 +125,7 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Button>
-                        <Button x:Name="b5" Grid.Column="3" HorizontalAlignment="Left" Margin="0,117,0,0" VerticalAlignment="Top" Width="52" Grid.Row="1" Click="b5_Click">
+                        <Button x:Name="b5" Grid.Column="3" HorizontalAlignment="Left" Margin="0,367,0,0" VerticalAlignment="Top" Width="52" Click="b5_Click">
                             <Rectangle Height="14" Width="22">
                                 <Rectangle.Stroke>
                                     <ImageBrush ImageSource="strzalka.png"/>
@@ -141,9 +138,9 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Button>
-                        <Button x:Name="krzyżyk" Content="Usuń" Grid.Column="4" HorizontalAlignment="Left" Margin="2,240,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" Click="krzyżyk_Click" Background="#FFF7F7F7"/>
-                        <Button x:Name="rachunek" Content="Rachunek" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Column="4" Margin="467,276,0,0" Grid.Row="1" RenderTransformOrigin="0.602,-0.438" Click="rachunek_Click"/>
-                        <Label x:Name="Suma" Content="SUMA:" Grid.Column="4" HorizontalAlignment="Left" Margin="426,247,0,0" Grid.Row="1" VerticalAlignment="Top" Width="116" FontSize="16"/>
+                        <Button x:Name="krzyżyk" Content="Usuń" Grid.Column="3" HorizontalAlignment="Left" Margin="80,490,0,0" VerticalAlignment="Top" Width="120" Click="krzyżyk_Click" Background="#FFF7F7F7"/>
+                        <Button x:Name="rachunek" Content="Rachunek" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Column="3" Margin="545,526,0,0" RenderTransformOrigin="0.602,-0.438" Click="rachunek_Click"/>
+                        <Label x:Name="Suma" Content="SUMA:" Grid.Column="3" HorizontalAlignment="Left" Margin="504,497,0,0" VerticalAlignment="Top" Width="116" FontSize="16"/>
 
 
                     </Grid>
@@ -155,15 +152,15 @@
                             <TextBlock Text="Rezerwacja" Margin="2,0,0,0" VerticalAlignment="Center" FontSize="16" />
                         </StackPanel>
                     </TabItem.Header>
-                    <Grid Background="#FFE5E5E5" Margin="40,40,-640,-280">
+                    <Grid Background="#FFE5E5E5" Margin="40,40,-379,-280">
 
                         <Label x:Name="Etykieta_Rezerwacja_Imie" Content="Imię:" HorizontalAlignment="Left" Margin="194,216,0,0" VerticalAlignment="Top"/>
                         <TextBox x:Name="Tekst_Rezerwacja_Imie" HorizontalAlignment="Left" Height="23" Margin="258,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                         <Label x:Name="Etykieta_Rezerwacja_Nazwisko" Content="Nazwisko:" HorizontalAlignment="Left" Margin="166,275,0,0" VerticalAlignment="Top"/>
                         <TextBox x:Name="Tekst_Rezerwacja_Nazwisko" HorizontalAlignment="Left" Height="23" Margin="258,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                        <TextBox x:Name="Tekst_Rezerwacja_Numer" HorizontalAlignment="Left" Height="23" Margin="258,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.552,5.626"/>
+                        <TextBox x:Name="Tekst_Rezerwacja_Numer" HorizontalAlignment="Left" Height="23" Margin="258,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.552,5.626" TextChanged="Tekst_Rezerwacja_Numer_TextChanged" PreviewTextInput="Tekst_Rezerwacja_Numer_PreviewTextInput"/>
                         <Label x:Name="Etykieta_Rezerwacja_Numer" Content="Telefon:" HorizontalAlignment="Left" Margin="178,342,0,0" VerticalAlignment="Top"/>
-                        <DataGrid x:Name="Dane_Rezerwacja"  Margin="604,39,41,0" VerticalAlignment="Top" Width="543" Height="451" Initialized="Dane_Rezerwacja_Initialized" IsReadOnly="True" FontSize="16"  ColumnWidth="*" FrozenColumnCount="1"/>
+                        <DataGrid x:Name="Dane_Rezerwacja"  Margin="604,39,41,0" VerticalAlignment="Top" Width="543" Height="451" Initialized="Dane_Rezerwacja_Initialized" IsReadOnly="True" FontSize="16"  ColumnWidth="*" FrozenColumnCount="1" AutoGeneratingColumn="Dane_Rezerwacja_AutoGeneratingColumn" />
                         <Label x:Name="Etykieta_Rezerwacja_Stolik" Content="Numer stolika:" HorizontalAlignment="Left" Margin="142,407,0,0" VerticalAlignment="Top"/>
                         <Button x:Name="Przycisk_Rezerwacja_Dodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="258,490,0,0" VerticalAlignment="Top" Width="120" Height="19" Click="Przycisk_Rezerwacja_Dodaj_Click"/>
                         <Button x:Name="Przycisk_Rezerwacja_Usun" Content="Usuń" HorizontalAlignment="Left" Margin="604,490,0,0" VerticalAlignment="Top" Width="120" Height="19" Click="Przycisk_Rezerwacja_Usun_Click"/>
@@ -198,7 +195,7 @@
                             <TextBlock Text="Menu" Margin="2,0,0,0" VerticalAlignment="Center" FontSize="16" />
                         </StackPanel>
                     </TabItem.Header>
-                    <Grid Background="#FFE5E5E5" Margin="44,38,-644,-279">
+                    <Grid Background="#FFE5E5E5" Margin="44,38,-383,-279">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="313*"/>
                             <ColumnDefinition Width="33*"/>
@@ -234,7 +231,7 @@
                             <TextBlock Margin="2,0,0,0" VerticalAlignment="Center" FontSize="16" ><Run Text="Pracownicy"/></TextBlock>
                         </StackPanel>
                     </TabItem.Header>
-                    <Grid Background="#FFE5E5E5" Margin="40,40,-640,-280">
+                    <Grid Background="#FFE5E5E5" Margin="40,40,-379,-280">
 
                         <Label x:Name="Etykieta_Pracownicy_Imie" Content="Imię:" HorizontalAlignment="Left" Margin="188,86,0,0" VerticalAlignment="Top"/>
                         <Label x:Name="Etykieta_Pracownicy_Nazwisko" Content="Nazwisko:" HorizontalAlignment="Left" Margin="161,152,0,0" VerticalAlignment="Top"/>
@@ -260,7 +257,7 @@
                             <TextBlock Margin="2,0,0,0" VerticalAlignment="Center" FontSize="16" ><Run Text="Stoliki"/></TextBlock>
                         </StackPanel>
                     </TabItem.Header>
-                    <Grid Background="#FFE5E5E5" Margin="41,42,-641,-281">
+                    <Grid Background="#FFE5E5E5" Margin="41,42,-380,-281">
 
                         <DataGrid x:Name="Dane_Stoliki" HorizontalAlignment="Left" Margin="606,39,0,0" VerticalAlignment="Top" Width="543" Height="451" IsReadOnly="True" ColumnWidth="*" FrozenColumnCount="1" FontSize="16"/>
                         <Label x:Name="Etykieta_Stoliki_Miejsca" Content="Ilość miejsc:" HorizontalAlignment="Left" Margin="164,166,0,0" VerticalAlignment="Top"/>
@@ -273,7 +270,19 @@
 
                     </Grid>
                 </TabItem>
-                
+                <TabItem x:Name="Karta_opcje" Margin="103,41,-106,-40"  >
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Height="36" Margin="0,0,-0.4,0" VerticalAlignment="Top">
+                            <Image Height="32" Source="ustawienia2.png" Width="32"/>
+                            <TextBlock Margin="2,0,0,0" VerticalAlignment="Center" FontSize="16" ><Run Text="Opcje"/></TextBlock>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid Background="#FFE5E5E5" Margin="41,42,-380,-281">
+
+
+
+                    </Grid>
+                </TabItem>
 
             </TabControl>
         </Grid>
