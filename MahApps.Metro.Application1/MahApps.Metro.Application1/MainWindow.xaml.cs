@@ -13,20 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Data;
 using System.Globalization;
@@ -76,8 +62,29 @@ namespace MahApps.Metro.Application1
 
                 // otwórz połączenie:
                 sqlConn.Open();
-                logowanie.Ustaw_login(Text_Logowanie.Text);
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = sqlConn;
+
                 logowanie.Ustaw_haslo(Text_Haslo.ToString());
+               
+
+                cmd.CommandText = "Select Stanowisko from Restauracja.dbo.Pracownik where Login_pracownik= '" + Text_Logowanie.Text.ToString() + "' and Status_zatrudnienia='zatrudniony'";
+
+                string login = cmd.ExecuteScalar().ToString();
+
+                logowanie.Ustaw_login(Text_Logowanie.Text);
+                if (login != "Menager")
+                {
+                    Karta_menu.Visibility = Visibility.Hidden;
+                    Karta_pracownicy.Visibility = Visibility.Hidden;
+                    Karta_stolik.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    Karta_menu.Visibility = Visibility.Visible;
+                    Karta_pracownicy.Visibility = Visibility.Visible;
+                    Karta_stolik.Visibility = Visibility.Visible;
+                }
                 Text_Logowanie.Text = "";
                 Text_Haslo.Clear();
                 sqlConn.Close();
@@ -89,12 +96,16 @@ namespace MahApps.Metro.Application1
                 label_DodajMenu.Visibility = Visibility.Hidden;
                 label_UsunMenu.Visibility = Visibility.Hidden;
                 comboBox_Copy.Visibility = Visibility.Hidden;
+               
+
             }
             catch (System.Data.SqlClient.SqlException se)
             {
                 MessageBox.Show(se.Message, se.Source);
 
             }
+
+
         }
 
         class dane
@@ -157,7 +168,7 @@ namespace MahApps.Metro.Application1
             {
                 if (Tekst_Menu_Cena.Text != "")
                 {
-                    sqlCmd.CommandText = "Select Id_menu from Menu where Opis = '" + comboBox.Text + "'";
+                    sqlCmd.CommandText = "Select Id_menu from Menu where Opis = '" + comboBox.Text + "'and aktualnosc='aktualne'";
                     int id_menu = (int)sqlCmd.ExecuteScalar();
                     string result = Tekst_Menu_Cena.Text.Replace(",", ".");
 
@@ -235,7 +246,7 @@ namespace MahApps.Metro.Application1
         {
             if (comboBox.Items.Count > 0) comboBox.Items.Clear();
 
-            string Sql = "select Opis from Menu";
+            string Sql = "select Opis from Menu where aktualnosc='aktualne'";
             SqlConnection conn = new SqlConnection("Server = " + serwer + ";Integrated Security = SSPI; Database = 'Restauracja'");
             conn.Open();
             SqlCommand cmd = new SqlCommand(Sql, conn);
@@ -610,7 +621,10 @@ namespace MahApps.Metro.Application1
                 if (liczba_wierszu == 0)
                 {
                     sqlCmd.CommandText = "insert into Pracownik (Imie, Nazwisko, Stanowisko,Login_pracownik) Values(" + "'" + Tekst_Pracownicy_Imie.Text + "'" + "," + "'" + Tekst_Pracownicy_Nazwisko.Text + "'" + "," + "'" + comboBox_Pracownicy.Text.ToString() + "'" + ",'" + Tekst_Pracownicy_Login.Text + "'" + ");" +
-                           "CREATE LOGIN " + Tekst_Pracownicy_Login.Text + " WITH PASSWORD ='" + Tekst_Pracownicy_Haslo.Text + "'; " + "CREATE USER " + Tekst_Pracownicy_Login.Text + "User" + " FOR LOGIN " + Tekst_Pracownicy_Login.Text + ";";
+                           "CREATE LOGIN " + Tekst_Pracownicy_Login.Text + " WITH PASSWORD ='" + Tekst_Pracownicy_Haslo.Text + "'; " + "CREATE USER " + Tekst_Pracownicy_Login.Text + "User" + " FOR LOGIN " + Tekst_Pracownicy_Login.Text + ";" + "use Restauracja " +
+                           " EXEC sp_addrolemember 'db_datareader','" + Tekst_Pracownicy_Login.Text + "User'" +
+                           " use Restauracja " +
+                           " EXEC sp_addrolemember 'db_datawriter','" + Tekst_Pracownicy_Login.Text + "User'";
                     sqlCmd.ExecuteReader();
                     Tekst_Pracownicy_Imie.Text = "";
                     Tekst_Pracownicy_Nazwisko.Text = "";
@@ -907,6 +921,7 @@ namespace MahApps.Metro.Application1
                 string alter = "select count(*) from Wyswietl_Rezerwacja where Data='" + dzien.SelectedDate.Value.Year + " / " + dzien.SelectedDate.Value.Month + " / " + dzien.SelectedDate.Value.Day + "' and Godzina='" + comboBox2.SelectedItem.ToString() + ":" + comboBox3.SelectedItem.ToString() + ":00' and Stolik ='" + comboBox1.SelectedItem.ToString() + "'";
                 sqlCmd.CommandText = alter;
                 int czy_zarezerwowane = Convert.ToInt32(sqlCmd.ExecuteScalar().ToString());
+                
                 if (czy_zarezerwowane == 0)
                 {
                     alter = "select count(*) from Klient where Imie = '" + Tekst_Rezerwacja_Imie.Text + "'and Nazwisko='" + Tekst_Rezerwacja_Nazwisko.Text + "'and Telefon='" + Tekst_Rezerwacja_Numer.Text + "';";
@@ -949,6 +964,7 @@ namespace MahApps.Metro.Application1
                     sqlConn.Close();
 
                 }
+                  
             }
         }
 
@@ -995,7 +1011,7 @@ namespace MahApps.Metro.Application1
 
             if (Zamowienie_Combo_Menu.Items.Count > 0) Zamowienie_Combo_Menu.Items.Clear();
 
-            string Sql = "select Opis from Menu";
+            string Sql = "select Opis from Menu where aktualnosc='aktualne'";
             SqlConnection conn = new SqlConnection("Server = " + serwer + ";Integrated Security = SSPI; Database = 'Restauracja'");
             conn.Open();
             SqlCommand cmd = new SqlCommand(Sql, conn);
@@ -1026,7 +1042,7 @@ namespace MahApps.Metro.Application1
 
                 SqlConnection conn = new SqlConnection("Server = " + serwer + ";Integrated Security = SSPI; Database = 'Restauracja'");
                 conn.Open();
-                string Sql1 = "select Opis from Wyswietl_Menu where Rodzaj= '" + Zamowienie_Combo_Menu.SelectedItem.ToString() + "' and Kategoria='Danie główne'";
+                string Sql1 = "select Opis from Wyswietl_Menu where Rodzaj= '" + Zamowienie_Combo_Menu.SelectedItem.ToString() + "' and Kategoria='Danie główne' ";
                 SqlCommand cmd = new SqlCommand(Sql1, conn);
                 SqlDataReader DR = cmd.ExecuteReader();
 
@@ -1228,9 +1244,16 @@ namespace MahApps.Metro.Application1
                                 listView.Items.Clear();
                                 temp.Wyswietl(listView);
                                 dataReader.Close();
+                                
                             }
                             conn.Close();
+                            decimal kwota = 0;
+                            foreach (dolisty temp1 in listView.Items)
+                            {
+                                kwota += (Convert.ToDecimal(temp1.Cena) * Convert.ToInt32(temp1.Ilosc));
 
+                            }
+                            Suma.Content = "SUMA: " + kwota.ToString();
 
                         }
 
@@ -1300,7 +1323,13 @@ namespace MahApps.Metro.Application1
                     
                 }
                 listView.Items.Clear();
+                decimal kwota = 0;
+                foreach (dolisty temp1 in listView.Items)
+                {
+                    kwota += (Convert.ToDecimal(temp1.Cena) * Convert.ToInt32(temp1.Ilosc));
 
+                }
+                Suma.Content = "SUMA: " + kwota.ToString();
                 temp3.Wyswietl(listView);
             }
 
@@ -1334,6 +1363,13 @@ namespace MahApps.Metro.Application1
                         temp.Wyswietl(listView);
                     }
                 }
+                decimal kwota = 0;
+                foreach (dolisty temp1 in listView.Items)
+                {
+                    kwota += (Convert.ToDecimal(temp1.Cena) * Convert.ToInt32(temp1.Ilosc));
+
+                }
+                Suma.Content = "SUMA: " + kwota.ToString();
             }
         }
 
@@ -1358,7 +1394,7 @@ namespace MahApps.Metro.Application1
                 cmd = "Select Id_pracownika from Pracownik where Login_pracownik = '" + logowanie.Login + "'";
                 sqlCmd.CommandText = cmd;
                 int id_pracownik = (int)sqlCmd.ExecuteScalar();
-                int numer_stolika = Convert.ToInt32(Combo_Zamowienie_Stolik.SelectedItem.ToString());
+                int numer_stolika = 0 ;
                 int id_klienta = 0;
                 int id_rezerwacja =0;
                 foreach (zamowienie temp in Zamowienia)
@@ -1366,6 +1402,7 @@ namespace MahApps.Metro.Application1
                     if (temp.Numer_stolika == Convert.ToInt32(Combo_Zamowienie_Stolik.SelectedItem.ToString()))
                     {
                         id_klienta = temp.Id_klienta;
+                        numer_stolika = temp.Id_stolika;
                     }
 
                 }
@@ -1393,6 +1430,7 @@ namespace MahApps.Metro.Application1
                     }
                     
                 }
+                Suma.Content = "Suma: ";
                 sqlConn.Close();
             }
         }
@@ -1421,10 +1459,20 @@ namespace MahApps.Metro.Application1
                     sqlConn.Open();
                     SqlCommand sqlCmd = new SqlCommand();
                     sqlCmd.Connection = sqlConn;
-                    string cmd = "Insert into Menu (Opis) Values ('" + textBox_dodaj_menu.Text + "')";
+                    string cmd = "Select count(*) from Menu where Opis='" + textBox_dodaj_menu.Text + "' and aktualnosc='aktualne'";
                     sqlCmd.CommandText = cmd;
-                    sqlCmd.ExecuteNonQuery();
-                    textBox_dodaj_menu.Text = "";
+                    int liczba = (int)sqlCmd.ExecuteScalar();
+                    if (liczba == 0)
+                    {
+                        cmd = "Insert into Menu (Opis) Values ('" + textBox_dodaj_menu.Text + "')";
+                        sqlCmd.CommandText = cmd;
+                        sqlCmd.ExecuteNonQuery();
+                        textBox_dodaj_menu.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nie mozna dodać już istnieje takie menu.", "Bład");
+                    }
                     sqlConn.Close();
                 }
             }
@@ -1439,9 +1487,9 @@ namespace MahApps.Metro.Application1
      
         private void comboBox_Copy_DropDownOpened(object sender, EventArgs e)
         {
-            if (comboBox.Items.Count > 0) comboBox.Items.Clear();
+            if (comboBox_Copy.Items.Count > 0) comboBox_Copy.Items.Clear();
 
-            string Sql = "select Opis from Menu";
+            string Sql = "select Opis from Menu where aktualnosc='aktualne'";
             SqlConnection conn = new SqlConnection("Server = " + serwer + ";Integrated Security = SSPI; Database = 'Restauracja'");
             conn.Open();
             SqlCommand cmd = new SqlCommand(Sql, conn);
@@ -1469,16 +1517,19 @@ namespace MahApps.Metro.Application1
                     sqlConn.Open();
                     SqlCommand sqlCmd = new SqlCommand();
                     sqlCmd.Connection = sqlConn;
+                    sqlCmd.CommandText = "Select Id_menu from Menu where Opis = '" + comboBox.Text + "'and aktualnosc='aktualne'";
+                    int id_menu = (int)sqlCmd.ExecuteScalar();
+                    sqlCmd.CommandText = "update Menu set aktualnosc='nieaktualne' where Opis='" + comboBox_Copy.SelectedItem.ToString() + "'";
 
+                    sqlCmd.ExecuteNonQuery();
 
-                        
-                        
+                    sqlCmd.CommandText = "update Produkt set Aktualnosc= 'nieaktualny' where Id_menu=" + id_menu;
+                    sqlCmd.ExecuteNonQuery();
+                   
                     sqlConn.Close();
 
                     wyswietlMenu();
 
-
-                    
                 }
             }
             else
@@ -1486,6 +1537,11 @@ namespace MahApps.Metro.Application1
                 label_UsunMenu.Visibility = Visibility.Visible;
                 comboBox_Copy.Visibility = Visibility.Visible;
             }
+        }
+
+        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

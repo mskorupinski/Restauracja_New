@@ -42,24 +42,25 @@
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="105*"/>
-                            <ColumnDefinition Width="426*"/>
+                            <ColumnDefinition Width="231*"/>
+                            <ColumnDefinition Width="195*"/>
                             <ColumnDefinition Width="77*"/>
                             <ColumnDefinition Width="543*"/>
                             <ColumnDefinition Width="37*"/>
                         </Grid.ColumnDefinitions>
                         <ComboBox x:Name="Zamowienie_Combo_Menu" HorizontalAlignment="Left" Margin="70,98,0,0" VerticalAlignment="Top" Width="120" DropDownOpened="Zamowienie_Combo_Menu_DropDownOpened" SelectionChanged="Zamowienie_Combo_Menu_SelectionChanged" Grid.ColumnSpan="2"/>
-                        <ComboBox x:Name="Zamowienie_Combo_Danie" HorizontalAlignment="Right" Margin="0,141,95,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-                        <ComboBox x:Name="Zamowienie_Combo_Zupa" HorizontalAlignment="Left" Margin="211,203,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-                        <ComboBox x:Name="Zamowienie_Combo_Przystawka" HorizontalAlignment="Left" Margin="211,6,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="1"/>
-                        <ComboBox x:Name="Zamowienie_Combo_Deser" HorizontalAlignment="Left" Margin="211,64,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="1"/>
-                        <ComboBox x:Name="Zamowienie_Combo_Napoj" HorizontalAlignment="Left" Margin="211,117,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="1"/>
+                        <ComboBox x:Name="Zamowienie_Combo_Danie" HorizontalAlignment="Right" Margin="0,141,95,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="Zamowienie_Combo_Zupa" HorizontalAlignment="Left" Margin="211,203,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="Zamowienie_Combo_Przystawka" HorizontalAlignment="Left" Margin="211,6,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="Zamowienie_Combo_Deser" HorizontalAlignment="Left" Margin="211,64,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="Zamowienie_Combo_Napoj" HorizontalAlignment="Left" Margin="211,117,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
                         <Label x:Name="Zamowienie_Etykieta_Menu" Content="Menu" HorizontalAlignment="Left" Margin="26,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,-1.077"/>
                         <Label x:Name="label" Content="Dania główne:" HorizontalAlignment="Left" Margin="103,149,0,0" VerticalAlignment="Top" Width="91" Grid.Column="1" RenderTransformOrigin="0.302,0.538"/>
                         <Label x:Name="label1" Content="Zupy:" HorizontalAlignment="Left" Margin="155,203,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.921,2.423" Grid.Column="1"/>
                         <Label x:Name="label2" Content="Przystawki:" HorizontalAlignment="Left" Margin="126,4,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"/>
                         <Label x:Name="label3" Content="Desery:" HorizontalAlignment="Left" Margin="145,59,0,0" VerticalAlignment="Top" Width="49" Grid.Row="1" Grid.Column="1"/>
                         <Label x:Name="label4" Content="Napoje:" HorizontalAlignment="Left" Margin="143,116,0,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"/>
-                        <ListView x:Name="listView" Grid.Column="3" Margin="2,39,1,0" VerticalAlignment="Top" Initialized="listView_Initialized" Height="451" Grid.RowSpan="2" FontSize="16">
+                        <ListView x:Name="listView" Grid.Column="4" Margin="2,39,1,0" VerticalAlignment="Top" Initialized="listView_Initialized" Height="451" Grid.RowSpan="2" FontSize="16">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Nazwa" DisplayMemberBinding="{Binding Nazwa}" Width="301"/>
@@ -70,12 +71,12 @@
                         </ListView>
                         <ComboBox x:Name="Combo_Zamowienie_Stolik" HorizontalAlignment="Left" Margin="70,39,0,0" VerticalAlignment="Top" Width="120" DropDownOpened="Combo_Zamowienie_Stolik_DropDownOpened" Initialized="Combo_Zamowienie_Stolik_Initialized" SelectionChanged="Combo_Zamowienie_Stolik_SelectionChanged_1" Grid.ColumnSpan="2"/>
                         <Label x:Name="label5" Content="Stolik" HorizontalAlignment="Left" Margin="26,42,0,0" VerticalAlignment="Top"/>
-                        <ComboBox x:Name="c1" Grid.Column="1" HorizontalAlignment="Left" Margin="357,141,0,0" VerticalAlignment="Top" Width="42" Initialized="c1_Initialized"/>
-                        <ComboBox x:Name="c2" Grid.Column="1" HorizontalAlignment="Left" Margin="358,203,0,0" VerticalAlignment="Top" Width="41" Initialized="c2_Initialized"/>
-                        <ComboBox x:Name="c3" Grid.Column="1" HorizontalAlignment="Left" Margin="358,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41" Initialized="c3_Initialized"/>
-                        <ComboBox x:Name="c4" Grid.Column="1" HorizontalAlignment="Left" Margin="357,59,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41" Initialized="c4_Initialized"/>
-                        <ComboBox x:Name="c5" Grid.Column="1" HorizontalAlignment="Left" Margin="358,116,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41" Initialized="c5_Initialized"/>
-                        <Button x:Name="b1" Grid.Column="2" HorizontalAlignment="Left" Margin="0,141,0,0" VerticalAlignment="Top" Width="52" Click="b1_Click" Background="#FFF1F0F0" FontSize="10" Height="26" FontWeight="Bold">
+                        <ComboBox x:Name="c1" Grid.Column="2" HorizontalAlignment="Left" Margin="126,141,0,0" VerticalAlignment="Top" Width="42" Initialized="c1_Initialized"/>
+                        <ComboBox x:Name="c2" Grid.Column="2" HorizontalAlignment="Left" Margin="127,203,0,0" VerticalAlignment="Top" Width="41" Initialized="c2_Initialized"/>
+                        <ComboBox x:Name="c3" Grid.Column="2" HorizontalAlignment="Left" Margin="127,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41" Initialized="c3_Initialized"/>
+                        <ComboBox x:Name="c4" Grid.Column="2" HorizontalAlignment="Left" Margin="126,59,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41" Initialized="c4_Initialized"/>
+                        <ComboBox x:Name="c5" Grid.Column="2" HorizontalAlignment="Left" Margin="127,116,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41" Initialized="c5_Initialized"/>
+                        <Button x:Name="b1" Grid.Column="3" HorizontalAlignment="Left" Margin="0,141,0,0" VerticalAlignment="Top" Width="52" Click="b1_Click" Background="#FFF1F0F0" FontSize="10" Height="26" FontWeight="Bold">
                             <Rectangle Height="14" Width="22">
                                 <Rectangle.Stroke>
                                     <ImageBrush ImageSource="strzalka.png"/>
@@ -88,7 +89,7 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Button>
-                        <Button x:Name="b2" Grid.Column="2" HorizontalAlignment="Left" Margin="0,196,0,0" VerticalAlignment="Top" Width="52" Click="b2_Click" >
+                        <Button x:Name="b2" Grid.Column="3" HorizontalAlignment="Left" Margin="0,196,0,0" VerticalAlignment="Top" Width="52" Click="b2_Click" >
                             <Rectangle Height="14" Width="22">
                                 <Rectangle.Stroke>
                                     <ImageBrush ImageSource="strzalka.png"/>
@@ -101,7 +102,7 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Button>
-                        <Button x:Name="b3" Grid.Column="2" HorizontalAlignment="Left" Margin="0,4,0,0" VerticalAlignment="Top" Width="52" Grid.Row="1" Click="b3_Click">
+                        <Button x:Name="b3" Grid.Column="3" HorizontalAlignment="Left" Margin="0,4,0,0" VerticalAlignment="Top" Width="52" Grid.Row="1" Click="b3_Click">
                             <Rectangle Height="14" Width="22">
                                 <Rectangle.Stroke>
                                     <ImageBrush ImageSource="strzalka.png"/>
@@ -114,7 +115,7 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Button>
-                        <Button x:Name="b4" Grid.Column="2" HorizontalAlignment="Left" Margin="0,59,0,0" VerticalAlignment="Top" Width="52" Grid.Row="1" Click="b4_Click">
+                        <Button x:Name="b4" Grid.Column="3" HorizontalAlignment="Left" Margin="0,59,0,0" VerticalAlignment="Top" Width="52" Grid.Row="1" Click="b4_Click">
                             <Rectangle Height="14" Width="22">
                                 <Rectangle.Stroke>
                                     <ImageBrush ImageSource="strzalka.png"/>
@@ -127,7 +128,7 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Button>
-                        <Button x:Name="b5" Grid.Column="2" HorizontalAlignment="Left" Margin="0,117,0,0" VerticalAlignment="Top" Width="52" Grid.Row="1" Click="b5_Click">
+                        <Button x:Name="b5" Grid.Column="3" HorizontalAlignment="Left" Margin="0,117,0,0" VerticalAlignment="Top" Width="52" Grid.Row="1" Click="b5_Click">
                             <Rectangle Height="14" Width="22">
                                 <Rectangle.Stroke>
                                     <ImageBrush ImageSource="strzalka.png"/>
@@ -140,8 +141,9 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Button>
-                        <Button x:Name="krzyżyk" Content="Usuń" Grid.Column="3" HorizontalAlignment="Left" Margin="2,240,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" Click="krzyżyk_Click" Background="#FFF7F7F7"/>
-                        <Button x:Name="rachunek" Content="Rachunek" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Column="3" Margin="467,276,0,0" Grid.Row="1" RenderTransformOrigin="0.602,-0.438" Click="rachunek_Click"/>
+                        <Button x:Name="krzyżyk" Content="Usuń" Grid.Column="4" HorizontalAlignment="Left" Margin="2,240,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" Click="krzyżyk_Click" Background="#FFF7F7F7"/>
+                        <Button x:Name="rachunek" Content="Rachunek" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Grid.Column="4" Margin="467,276,0,0" Grid.Row="1" RenderTransformOrigin="0.602,-0.438" Click="rachunek_Click"/>
+                        <Label x:Name="Suma" Content="SUMA:" Grid.Column="4" HorizontalAlignment="Left" Margin="426,247,0,0" Grid.Row="1" VerticalAlignment="Top" Width="116" FontSize="16"/>
 
 
                     </Grid>
@@ -214,7 +216,7 @@
                         <Button x:Name="Przycisk_Menu_Usun" Content="Usuń" HorizontalAlignment="Left" Margin="138,491,0,0" VerticalAlignment="Top" Width="120" Click="Przycisk_Menu_Usun_Click" Grid.Column="4"/>
                         <DataGrid x:Name="Dane_Menu" HorizontalAlignment="Left" Margin="140,39,0,0" VerticalAlignment="Top" Width="542" Height="452" IsReadOnly="True" ColumnWidth="*" FrozenColumnCount="1" CanUserDeleteRows="False" Grid.ColumnSpan="3" FontSize="16" Grid.Column="4"/>
                         <Button x:Name="Przycisk_Menu_Dodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="250,491,0,0" VerticalAlignment="Top" Width="120" Click="Przycisk_Menu_Dodaj_Click" Grid.ColumnSpan="3"/>
-                        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="250,94,0,0" VerticalAlignment="Top" Width="120" DropDownOpened="comboBox_DropDownOpened" DropDownClosed="comboBox_DropDownClosed" Grid.ColumnSpan="3"/>
+                        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="250,94,0,0" VerticalAlignment="Top" Width="120" DropDownOpened="comboBox_DropDownOpened" DropDownClosed="comboBox_DropDownClosed" Grid.ColumnSpan="3" SelectionChanged="comboBox_SelectionChanged"/>
                         <Label x:Name="Etykieta_Menu_Opis1" Content="Kategoria:" HorizontalAlignment="Left" Margin="150,176,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,1.635"/>
                         <ComboBox x:Name="comboBox4" HorizontalAlignment="Left" Margin="250,176,0,0" VerticalAlignment="Top" Width="120" Initialized="comboBox4_Initialized" Grid.ColumnSpan="3"/>
                         <Button x:Name="Dodaj_Menu" Content="Dodaj Menu" HorizontalAlignment="Left" Margin="11,113,0,0" VerticalAlignment="Top" Width="119" Click="Dodaj_Menu_Click"/>
@@ -271,6 +273,7 @@
 
                     </Grid>
                 </TabItem>
+                
 
             </TabControl>
         </Grid>
